@@ -20,21 +20,13 @@
             <label for = "country"> Country </label>
             <select class = "countrybtn" id="country" required onchange = "countryfn()">
                 <option value="">Select Country</option>
-                <option class = "countryopt" value="US">United States</option>
                 <option class = "countryopt" value="IN">India</option>
                 <option class = "countryopt" value="CA">Canada</option>
-                <option class = "countryopt" value="GB">United Kingdom</option>
-                <option class = "countryopt" value="AU">Australia</option>
-                <option class = "countryopt" value="DE">Germany</option>
-                <option class = "countryopt" value="FR">France</option>
-                <option class = "countryopt" value="BR">Brazil</option>
-                <option class = "countryopt" value="JP">Japan</option>
-                <option class = "countryopt" value="ZA">South Africa</option>
             </select>
 
 
             <label for = "postal"> Postal Code </label>
-            <input type = "text" id = "postal" placeholder = "Postal Code" onchange="postalfn()">
+            <input type = "text" id = "postal" placeholder = "Postal Code" onchange="postalfn()" pattern = "\d{6}" required>
 
             <label for = "pwd"> Password </label>
             <input type = "password" id = "pwd" required onchange ="pwdfn()">
@@ -42,7 +34,6 @@
             <label for = "confirmpwd"> Confirm Password </label>
             <input type = "password" id = "confirmpwd" required onchange="confirmpwdfn()"> 
             
-            <!-- <input id = "submitbtn" type = "submit"> -->
             <button id = "submitbtn"> SUBMIT </button>
         </form>
 
