@@ -5,12 +5,12 @@ const emailfn = ()=>{
     const validity = emailinput.validity;
 
     if ( validity.valueMissing){
-        emailinput.setCustomValidity("It needs an email");
+        emailinput.setCustomValidity("Please enter a valid email!");
         emailinput.classList.add("error");
         emailinput.reportValidity();
     }
     else if ( validity.typeMismatch){
-        emailinput.setCustomValidity("That is not a valid email");
+        emailinput.setCustomValidity("Please enter a valid email address (e.g., user@example.com).");
         emailinput.reportValidity();
         emailinput.classList.add("error");
     }
@@ -37,10 +37,53 @@ const countryfn = ()=>{
         countries.setCustomValidity("");
         countries.reportValidity();
     }
+
+    const countrySelected = countries.value;
+    console.log(countrySelected,"is the country");
+    return [countrySelected]; 
 }
 
 const postalfn = ()=>{
     const postalinput = document.getElementById("postal");
+    console.log("welcome back")
+    const validity = postalinput.validity;
+
+    const [country] = countryfn();
+    console.log(country,"IS THE COUNTRY!");
+
+    if ( country === "IN"){
+        const regex_IN = /^\d{6}$/;
+        if ( !regex_IN.test(postalinput.value)){
+            console.log("FAILED ");
+            postalinput.setCustomValidity("Enter a 6-digit postal code for India (e.g., 560001)!");
+            postalinput.reportValidity();
+            postalinput.classList.add("error");
+        }
+        else{
+            postalinput.setCustomValidity("");
+            postalinput.reportValidity();
+            postalinput.classList.remove("error");
+        }
+    }
+
+    else if ( country === "CA"){ // canada
+        const regex_CAN = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
+        if ( !regex_CAN.test(postalinput.value)){
+            postalinput.setCustomValidity("Please enter a valid Canadian postal code (e.g., K1A 0B1).");
+            postalinput.reportValidity();
+            postalinput.classList.add("error");
+        }
+        else{
+            postalinput.classList.remove("error");
+            postalinput.setCustomValidity("");
+            postalinput.reportValidity();
+        }
+    }
+    else{
+        postalinput.setCustomValidity("Select a country first!");
+        postalinput.reportValidity();
+        postalinput.classList.add('error');
+    }
 }
 
 const pwdfn = ()=>{
